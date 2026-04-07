@@ -2,7 +2,6 @@
 
 import Navigation from '@/app/components/Navigation'
 import Footer from '@/app/components/Footer'
-import ScrollToTopButton from '@/app/components/ScrollToTopButton'
 import Link from 'next/link'
 
 export default function PartyPage() {
@@ -508,7 +507,6 @@ export default function PartyPage() {
       </section>
 
       <Footer />
-      <ScrollToTopButton />
     </div>
   )
 }

@@ -2,317 +2,257 @@
 
 import { useState, useEffect } from 'react'
 
+const heroImages = [
+  'https://dholera.gujarat.gov.in/web/image?model=project.gallery&field=images_project&id=58',
+  'https://dholera.gujarat.gov.in/web/image?model=project.gallery&field=images_project&id=59',
+  'https://dholera.gujarat.gov.in/web/image?model=project.gallery&field=images_project&id=60',
+]
+
 const Slideshow = () => {
   const [currentSlide, setCurrentSlide] = useState(0)
 
-  // Use your images from the public folder
-  const slides = [
-    { image: '/Images/Aravali Farm Images/Property-1.png', alt: 'Property' },
-    { image: '/Images/Aravali Farm Images/property-2.jpg', alt: 'Property' },
-    { image: '/Images/Aravali Farm Images/Born_FIre-1.png', alt: 'Bonfire' },
-    { image: '/Images/Aravali Farm Images/Graden-1.png', alt: 'Garden' },
-    { image: '/Images/Aravali Farm Images/Pool-1.png', alt: 'Pool' },
-    { image: '/Images/Aravali Farm Images/Living Room 2.jpg', alt: 'Living Room' },
-    { image: '/Images/Aravali Farm Images/Serprate_Sitting_Area-1.png ', alt: 'Living Room' },
-    
-  ]
-
   useEffect(() => {
-    const timer = setInterval(() => {
-      setCurrentSlide((prevSlide) => (prevSlide + 1) % slides.length)
-    }, 5000) // every 5 seconds
-    return () => clearInterval(timer)
-  }, [slides.length])
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % heroImages.length)
+    }, 6000)
+    return () => clearInterval(interval)
+  }, [])
 
   return (
-    <div className="slideshow-container" style={{ position: 'relative', top: '0', height: '100vh', margin: '0', padding: '0', overflow: 'hidden', borderRadius: '0', width: '100vw', left: '0', right: '0', zIndex: '1' }}>
-      {slides.map((slide, index) => (
+    <section
+      style={{
+        position: 'relative',
+        width: '100%',
+        height: '100vh',
+        minHeight: '600px',
+        overflow: 'hidden',
+      }}
+    >
+      {heroImages.map((img, index) => (
         <div
           key={index}
-          className={`slide ${index === currentSlide ? 'active' : ''}`}
           style={{
-            backgroundImage: `url('${slide.image}')`,
+            position: 'absolute',
+            inset: 0,
+            backgroundImage: `url(${img})`,
             backgroundSize: 'cover',
             backgroundPosition: 'center',
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            opacity: index === currentSlide ? 1 : 0,
-            transition: 'opacity 1s ease-in-out'
+            opacity: currentSlide === index ? 1 : 0,
+            transition: 'opacity 1.2s ease-in-out',
+            transform: currentSlide === index ? 'scale(1.02)' : 'scale(1)',
           }}
-        >
-          <div style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
-            background: 'rgba(0, 0, 0, 0.2)'
-          }}></div>
-        </div>
+        />
       ))}
 
-      {/* Overlay content */}
-      <div style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center'
-      }}>
+      <div
+        style={{
+          position: 'absolute',
+          inset: 0,
+          background: 'linear-gradient(to bottom, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.8) 100%)',
+        }}
+      />
 
-<div style={{
-  textAlign: 'center',
-  color: 'white',
-  padding: '0 1rem'
-}}>
-  <div style={{ marginBottom: '1rem' }}>
-    <div style={{
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center'
-    }}>
-      <h1 style={{
-        // The font size remains large and responsive
-        fontSize: 'clamp(4rem, 7.5vw, 10rem)',
-        
-        // This is where the unique font is applied
-        // fontFamily: "'Fraunces', serif", // important 
-        
-        // Reducing letter-spacing to make the unique curves of the font stand out more
-        letterSpacing: '0.05em', 
-        
-        // A bold weight for impact
-        fontWeight: '700', 
-        
-        // Optional: Can use a variable font property for even more unique contrast
-        fontVariationSettings: "'opsz' 144, 'wght' 700" 
-      }}>
-        ARAVALI FARM
-      </h1>
-
-      <div style={{
-        width: '21rem',
-        height: '0.5px',
-        background: '#ffffffff',
-        marginBottom: '1rem'
-      }}>
-
-      </div>
-
-      <p style={{
-        color: 'white',
-        fontSize: 'clamp(1rem, 4vw, 1.25rem)',
-        letterSpacing: '0.2em',
-        fontWeight: '300'
-      }}>
-        Luxury • Nature • Celebrations
-      </p>
-
-    </div>
-
-  </div>
-
-<button
-  style={{
-    background: 'transparent',
-    color: 'white',
-    marginTop: '3rem',
-    padding: '0.75rem 2.3rem',
-    fontSize: '1.125rem',
-    fontWeight: '300',
-    letterSpacing: '1.5px',
-    fontFamily: '"Poppins", "Helvetica Neue", Arial, sans-serif',
-    border: '1px solid #ffffffff',
-    cursor: 'pointer',
-    transition: 'all 0.4s ease',
-    borderRadius: '10px',
-    position: 'relative',
-    overflow: 'hidden',
-  }}
-  onMouseOver={(e) => {
-    const target = e.target as HTMLButtonElement
-    target.style.background = '#efe8e8ff'
-    target.style.color = 'black'
-    // target.style.border = '2px solid black'
-    target.style.transform = 'translateY(-4px) scale(1.05)'
-    target.style.boxShadow = '0 6px 20px rgba(255, 255, 255, 0.2)'
-  }}
-  onMouseOut={(e) => {
-    const target = e.target as HTMLButtonElement
-    target.style.background = 'transparent'
-    target.style.color = '#fffdfdff'
-    target.style.border = '1px solid white'
-    target.style.transform = 'translateY(0) scale(1)'
-    target.style.boxShadow = 'none'
-  }}
-
-  onClick={() => {
-    window.location.href = '/contact'
-  }}
->
-  Book Now
-</button>
-
-
-
-        </div>
-
-      </div>
-
-      {/* Scroll Indicator */}
-      <div style={{
-        position: 'absolute',
-        bottom: '20px',
-        left: '50%',
-        transform: 'translateX(-50%)',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        color: 'white',
-        textShadow: '1px 1px 2px rgba(0,0,0,0.7)',
-        animation: 'bounce 2s infinite'
-      }}>
-        <div style={{
-          fontSize: '0.9rem',
-          marginBottom: '0.5rem',
-          textAlign: 'center',
-          letterSpacing: '0.8px',
-          fontFamily:  '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
-          fontWeight: '200',
-    //   fontFamily: '"Poppins", "Helvetica Neue", Arial, sans-serif',
-    // fontWeight: '10',
-        }}>
-          Scroll Down to explore
-        </div>
-        <div style={{
-          width: '1.4px',
-          height: '30px',
-          background: 'rgba(255, 255, 255, 0.8)',
-          borderRadius: '1px',
+      <div
+        style={{
           position: 'relative',
-          overflow: 'hidden'
-        }}>
-          
-          <div style={{
-            position: 'absolute',
-            top: '0',
-            left: '0',
-            width: '100%',
-            height: '10px',
-            background: 'white',
-            borderRadius: '1px',
-            animation: 'scrollIndicator 2s infinite'
-          }}></div>
+          zIndex: 10,
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          textAlign: 'center',
+          padding: '0 1.5rem',
+          maxWidth: '900px',
+          margin: '0 auto',
+        }}
+      >
+        <p
+          style={{
+            fontSize: 'clamp(0.75rem, 1.2vw, 1rem)',
+            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+            fontWeight: '500',
+            color: '#f0d078',
+            letterSpacing: '3px',
+            textTransform: 'uppercase',
+            marginBottom: '1rem',
+          }}
+        >
+          Turning Land into Legacy
+        </p>
+
+        <h1
+          style={{
+            fontSize: 'clamp(2rem, 5vw, 3.5rem)',
+            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+            fontWeight: '700',
+            color: 'white',
+            lineHeight: 1.15,
+            marginBottom: '1.5rem',
+            letterSpacing: '-0.5px',
+          }}
+        >
+          Own Land Where the Future of India Is Rising — <span style={{ color: '#f0d078' }}>Dholera Smart City</span>
+        </h1>
+
+        <p
+          style={{
+            fontSize: 'clamp(0.9rem, 1.5vw, 1.1rem)',
+            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+            fontWeight: '400',
+            color: 'rgba(255,255,255,0.85)',
+            lineHeight: 1.7,
+            marginBottom: '2.5rem',
+            maxWidth: '700px',
+          }}
+        >
+          Invest in India&apos;s first greenfield smart city. With world-class infrastructure,
+          government backing, and rapid development — Dholera is where visionary investors
+          are securing their future today.
+        </p>
+
+        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1.25rem' }}>
+          <a
+            href="/about"
+            style={{
+              fontSize: '1.1rem',
+              fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+              fontWeight: '600',
+              color: 'white',
+              textDecoration: 'none',
+              padding: '0.85rem 3rem',
+              borderRadius: '6px',
+              border: '2px solid rgba(240,208,120,0.5)',
+              background: 'rgba(240,208,120,0.1)',
+              transition: 'all 0.3s ease',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+            }}
+            onMouseOver={(e) => {
+              e.currentTarget.style.borderColor = '#f0d078'
+              e.currentTarget.style.background = 'rgba(240,208,120,0.2)'
+              e.currentTarget.style.transform = 'translateY(-2px)'
+            }}
+            onMouseOut={(e) => {
+              e.currentTarget.style.borderColor = 'rgba(240,208,120,0.5)'
+              e.currentTarget.style.background = 'rgba(240,208,120,0.1)'
+              e.currentTarget.style.transform = 'translateY(0)'
+            }}
+          >
+            Dholera
+          </a>
+        </div>
+
+        <div
+          style={{
+            display: 'flex',
+            gap: '2.5rem',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+          }}
+        >
+          <a
+            href="tel:+919998068887"
+            style={{
+              fontSize: '0.95rem',
+              fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+              fontWeight: '600',
+              color: '#1a3c5e',
+              textDecoration: 'none',
+              padding: '0.85rem 2rem',
+              borderRadius: '6px',
+              background: '#f0d078',
+              transition: 'all 0.3s ease',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+            }}
+            onMouseOver={(e) => {
+              e.currentTarget.style.background = '#e6c35a'
+              e.currentTarget.style.transform = 'translateY(-2px)'
+              e.currentTarget.style.boxShadow = '0 8px 25px rgba(240, 208, 120, 0.3)'
+            }}
+            onMouseOut={(e) => {
+              e.currentTarget.style.background = '#f0d078'
+              e.currentTarget.style.transform = 'translateY(0)'
+              e.currentTarget.style.boxShadow = 'none'
+            }}
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+            Book Site Visit
+          </a>
+          <a
+            href="#"
+            style={{
+              fontSize: '0.95rem',
+              fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+              fontWeight: '600',
+              color: 'white',
+              textDecoration: 'none',
+              padding: '0.85rem 2rem',
+              borderRadius: '6px',
+              border: '2px solid rgba(255,255,255,0.4)',
+              background: 'transparent',
+              transition: 'all 0.3s ease',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '0.5rem',
+            }}
+            onMouseOver={(e) => {
+              e.currentTarget.style.borderColor = 'white'
+              e.currentTarget.style.background = 'rgba(255,255,255,0.1)'
+              e.currentTarget.style.transform = 'translateY(-2px)'
+            }}
+            onMouseOut={(e) => {
+              e.currentTarget.style.borderColor = 'rgba(255,255,255,0.4)'
+              e.currentTarget.style.background = 'transparent'
+              e.currentTarget.style.transform = 'translateY(0)'
+            }}
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download Brochure
+          </a>
         </div>
       </div>
-      
-      {/* Responsive Design */}
+
+      <div
+        style={{
+          position: 'absolute',
+          bottom: '2rem',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          display: 'flex',
+          gap: '0.5rem',
+          zIndex: 10,
+        }}
+      >
+        {heroImages.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentSlide(index)}
+            style={{
+              width: currentSlide === index ? '2rem' : '0.5rem',
+              height: '0.5rem',
+              borderRadius: '9999px',
+              background: currentSlide === index ? '#f0d078' : 'rgba(255,255,255,0.5)',
+              border: 'none',
+              cursor: 'pointer',
+              transition: 'all 0.3s ease',
+              padding: 0,
+            }}
+          />
+        ))}
+      </div>
+
       <style jsx>{`
-        @keyframes bounce {
-          0%, 20%, 50%, 80%, 100% {
-            transform: translateX(-50%) translateY(0);
-          }
-          40% {
-            transform: translateX(-50%) translateY(-10px);
-          }
-          60% {
-            transform: translateX(-50%) translateY(-5px);
-          }
-        }
-        
-        @keyframes scrollIndicator {
-          0% {
-            transform: translateY(-10px);
-            opacity: 0;
-          }
-          50% {
-            opacity: 1;
-          }
-          100% {
-            transform: translateY(30px);
-            opacity: 0;
-          }
-        }
-        
-        /* Slideshow responsive styles */
-        @media (max-width: 1024px) {
-          div[style*="height: 100vh"] {
-            height: 100vh !important;
-          }
-          
-          div[style*="marginTop: 0"] {
-            margin-top: 0 !important;
-          }
-        }
-        
         @media (max-width: 768px) {
-          div[style*="height: 100vh"] {
-            height: 100vh !important;
-          }
-          
-          div[style*="marginTop: 0"] {
-            margin-top: 0 !important;
-          }
-          
-          div[style*="marginLeft: 0"] {
-            margin-left: 0 !important;
-          }
-          
-          div[style*="marginRight: 0"] {
-            margin-right: 0 !important;
-          }
-          
-          h1[style*="fontSize: clamp(3rem, 8vw, 6rem)"] {
-            font-size: clamp(2rem, 6vw, 4rem) !important;
-          }
-          
-          p[style*="fontSize: clamp(1.2rem, 3vw, 1.8rem)"] {
-            font-size: clamp(1rem, 2.5vw, 1.4rem) !important;
-          }
-          
-          button[style*="fontSize: clamp(1rem, 2.5vw, 1.3rem)"] {
-            font-size: clamp(0.9rem, 2vw, 1.1rem) !important;
-          }
-        }
-        
-        @media (max-width: 480px) {
-          div[style*="height: 100vh"] {
-            height: 100vh !important;
-          }
-          
-          div[style*="marginTop: 0"] {
-            margin-top: 0 !important;
-          }
-          
-          div[style*="marginLeft: 0"] {
-            margin-left: 0 !important;
-          }
-          
-          div[style*="marginRight: 0"] {
-            margin-right: 0 !important;
-          }
-          
-          h1[style*="fontSize: clamp(3rem, 8vw, 6rem)"] {
-            font-size: clamp(1.5rem, 5vw, 3rem) !important;
-          }
-          
-          p[style*="fontSize: clamp(1.2rem, 3vw, 1.8rem)"] {
-            font-size: clamp(0.9rem, 2vw, 1.2rem) !important;
-          }
-          
-          button[style*="fontSize: clamp(1rem, 2.5vw, 1.3rem)"] {
-            font-size: clamp(0.8rem, 1.8vw, 1rem) !important;
-            padding: 0.8rem 1.5rem !important;
+          section {
+            min-height: 500px;
           }
         }
       `}</style>
-    </div>
+    </section>
   )
 }
 

@@ -3,7 +3,6 @@
 import { useParams } from 'next/navigation'
 import PropertyDetails from '@/app/components/PropertyDetails'
 import Footer from '@/app/components/Footer'
-import ScrollToTopButton from '@/app/components/ScrollToTopButton'
 
 export default function PropertyPage() {
   const params = useParams()
@@ -16,9 +15,6 @@ export default function PropertyPage() {
          
       </div>
       <Footer />
-      
-      {/* Scroll to Top Button - appears only when footer is visible */}
-      <ScrollToTopButton />
     </main>
   )
 }

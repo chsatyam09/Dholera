@@ -1,5 +1,6 @@
 import './globals.css'
 import localFont from 'next/font/local'
+import FloatingIcons from './components/FloatingIcons'
 
 const inter = localFont({
   src: '../public/fonts/customfont.ttf',
@@ -7,21 +8,22 @@ const inter = localFont({
 })
 
 export const metadata = {
-  title: 'Farm House in Gurgaon | Aravali Farm – Luxury Pool & Party Venue',
-  description: 'Book Aravali Farm, a premium farmhouse in Gurgaon with a private pool & lush lawns. Ideal for parties, birthdays, weddings & corporate events.',
-  keywords: 'farmhouse in gurgaon, my farm gurgaon, farm in gurgaon, farmhouse for party, luxury farmhouse gurgaon, farmhouse with pool gurgaon, private farmhouse rent gurgaon, weekend farm stay gurgaon, farm stay gurgaon, farm rental gurgaon, farm house rental gurgaon, farm vacation gurgaon, organic farm gurgaon, farm retreat gurgaon, weekend getaway gurgaon, corporate party farmhouse, birthday party farmhouse, pool party venue gurgaon, farm house gurgaon, farm in gurgaon for rent, my farm in gurgaon',
+  title: 'Plots in Dholera Smart City | LNC Developers - Turning Land into Legacy',
+  description: 'Invest in Dholera Smart City with LNC Developers. Transparent pricing, verified plots, and future-ready developments. Book your site visit today!',
+  keywords: 'Dholera Smart City, plots in Dholera, LNC Developers, real estate investment, Dholera SIR, land in Dholera, Dholera plots, smart city investment, Dholera property, Aashirwad Enclave, Gujarat real estate',
   icons: {
     icon: "/favicon.ico",   
   },
   openGraph: {
-    title: 'Farm House in Gurgaon | Aravali Farm – Luxury Pool & Party Venue',
-    description: 'Book Aravali Farm, a premium farmhouse in Gurgaon with a private pool & lush lawns. Ideal for parties, birthdays, weddings & corporate events.',
+    title: 'Plots in Dholera Smart City | LNC Developers',
+    description: 'Invest in Dholera Smart City with LNC Developers. Transparent pricing, verified plots, and future-ready developments. Book your site visit today!',
+    siteName: 'LNC Developers',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Farm House in Gurgaon | Aravali Farm',
-    description: 'Premium farmhouse in Gurgaon with pool & lush lawns.',
+    title: 'Plots in Dholera Smart City | LNC Developers',
+    description: 'Invest in Dholera Smart City with LNC Developers. Transparent pricing, verified plots, and future-ready developments.',
   }
 }
 
@@ -32,50 +34,29 @@ export default function RootLayout({
 }) {
   const jsonLd = {
     '@context': 'https://schema.org',
-    '@type': 'EventVenue',
-    name: 'Aravali Farm',
-    description: 'Premium farmhouse in Gurgaon with private pool and lush lawns. Perfect for parties, corporate events, and weekend getaways.',
+    '@type': 'RealEstateAgent',
+    name: 'LNC Developers',
+    description: 'LNC Developers is a trusted land and construction company specializing in plots and developments in Dholera Smart City, Gujarat.',
     address: {
       '@type': 'PostalAddress',
-      addressLocality: 'Gurgaon',
+      streetAddress: 'B4-518/519, Spaze ITECH Park',
+      addressLocality: 'Gurugram',
       addressRegion: 'Haryana',
+      postalCode: '122018',
       addressCountry: 'IN'
     },
-    geo: {
-      '@type': 'GeoCoordinates',
-      latitude: '28.2918',
-      longitude: '76.9234'
-    },
-    url: 'https://aravalifarm.com',
-    telephone: '+91-7903962473',
-    priceRange: '₹₹',
-    amenityFeature: [
-      {
-        '@type': 'LocationFeatureSpecification',
-        name: 'Swimming Pool',
-        value: true
-      },
-      {
-        '@type': 'LocationFeatureSpecification',
-        name: 'Air Conditioning',
-        value: true
-      },
-      {
-        '@type': 'LocationFeatureSpecification',
-        name: 'WiFi',
-        value: true
-      },
-      {
-        '@type': 'LocationFeatureSpecification',
-        name: 'Parking',
-        value: true
-      },
-      {
-        '@type': 'LocationFeatureSpecification',
-        name: 'BBQ Area',
-        value: true
-      }
-    ]
+    url: 'https://lncdevelopers.com',
+    telephone: '+91-9998068887',
+    email: 'lncdholera@gmail.com',
+    sameAs: [
+      'https://www.facebook.com/lncdevelopers',
+      'https://www.instagram.com/lncdevelopers',
+      'https://www.linkedin.com/company/lncdevelopers'
+    ],
+    areaServed: {
+      '@type': 'Place',
+      name: 'Dholera Smart City, Gujarat, India'
+    }
   }
 
   return (
@@ -86,7 +67,10 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        {children}
+        <FloatingIcons />
+      </body>
     </html>
   )
 }

@@ -1,280 +1,184 @@
 'use client'
 
-import { useState } from 'react'
+import { projectsData } from '@/app/data/projects'
+
+const projects = projectsData.map((p) => ({
+  title: p.title,
+  status: p.status,
+  description: p.description,
+  image: p.image,
+  features: p.features,
+  href: `/projects/${p.slug}`,
+}))
 
 const Themes = () => {
-  const themes = [
-   {
-  id: 1,
-  title: "Birthday Celebration Venue",
-  subtitle: "Birthday Parties for Loved Ones",
-  description: "Celebrate your Loved Ones special day with friends and family at our beautiful venue. Enjoy great food, fun vibes, and a perfect space for unforgettable memories.",
-  image: "/Images/Aravali Farm Images/Birthday-1.png",
-  buttonText: "BOOK YOUR PARTY",
-  layout: "left"
-},
-{
-  id: 2,
-  title: "Corporate Party",
-  subtitle: "Perfect for Office Events",
-  description: "Plan your next team party or office event in our peaceful outdoor venue. Relax, bond, and celebrate with your colleagues in a refreshing natural setting.",
-  image: "/Images/Aravali Farm Images/Pool-1.png",
-  buttonText: "BOOK SHOOT",
-  layout: "right"
-},
-{
-  id: 3,
-  title: "Bachelor Parties",
-  subtitle: "Celebrate Before the Big Day",
-  description: "Throw an amazing bachelor party with your friends. Enjoy open spaces, fun activities, and a chill vibe—perfect for your last celebration before marriage.",
-  image: "/Images/Aravali Farm Images/Beer.jpg",
-  buttonText: "PLAN EVENT",
-  layout: "left"
-},
-{
-  id: 4,
-  title: "Family & Friends Parties",
-  subtitle: "Fun Times with Your Favorite People",
-  description: "Spend quality time with family and friends at our scenic farm. Perfect for birthdays, reunions, or casual get-togethers—enjoy nature, good food, and great company.",
-  image: "/Images/Aravali Farm Images/property-2.jpg",
-  buttonText: "JOIN SESSION",
-  layout: "right"
-}
-
-  ]
-
   return (
-    <section id="themes" style={{ padding: '1rem 0', background: '#ffffff' }}>
-      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 1rem' }}>
-        {/* Section Header */}
-        <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
-          <h2
-            style={{
-              fontSize: 'clamp(2.5rem, 6vw, 4rem)',
-              color: '#000000',
-              marginBottom: '0.5rem',
-              letterSpacing: '0.15em',
-              fontFamily: "'Dancing Script', cursive",
-              fontWeight: 600,
-              marginTop: '0rem'
-            }}
-          >
-            What We Offer
-          </h2>
-
-          <div
-            style={{
-              width: '100%',
-              height: '2px',
-              background: '#111111',
-              marginBottom: '1rem'
-            }}
-          ></div>
-
-          <p
-            style={{
-              fontSize: '1.125rem',
-              color: '#595959',
-              lineHeight: '1.7',
-              marginBottom: '2rem',
-              width: '100%',
-              fontFamily: '"Poppins", "Helvetica Neue", Arial, sans-serif',
-              textAlign: 'center'
-            }}
-          >
-            Experience unmatched comfort and 100% privacy at  beautifully curated farmhouse — 
-            perfect for parties, get-togethers, or a peaceful staycation.
+    <section
+      id="projects"
+      style={{
+        padding: '5rem 1.5rem',
+        background: 'white',
+      }}
+    >
+      <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
+        <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+          <p style={{
+            fontSize: '0.8rem',
+            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+            fontWeight: '600',
+            color: '#c8a45a',
+            letterSpacing: '2px',
+            textTransform: 'uppercase',
+            marginBottom: '0.75rem',
+          }}>
+            Our Developments
           </p>
+          <h2 style={{
+            fontSize: 'clamp(1.8rem, 3vw, 2.5rem)',
+            fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+            fontWeight: '700',
+            color: '#1a3c5e',
+            lineHeight: 1.2,
+            marginBottom: '1rem',
+          }}>
+            Featured Projects
+          </h2>
+          <div style={{ width: '60px', height: '3px', background: '#c8a45a', margin: '0 auto' }} />
         </div>
 
-        {/* Theme Cards */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '6rem' }}>
-          {themes.map((theme, index) => (
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(3, 1fr)',
+          gap: '2rem',
+        }}>
+          {projects.map((project, index) => (
             <div
-              key={theme.id}
+              key={index}
               style={{
-                display: 'flex',
-                alignItems: 'center',
-                gap: '3rem',
-                flexDirection: theme.layout === 'right' ? 'row-reverse' : 'row',
-                minHeight: '400px'
+                borderRadius: '12px',
+                overflow: 'hidden',
+                background: 'white',
+                boxShadow: '0 4px 20px rgba(0,0,0,0.06)',
+                transition: 'all 0.4s ease',
+                border: '1px solid rgba(0,0,0,0.06)',
               }}
-              className="theme-card"
+              onMouseOver={(e) => {
+                e.currentTarget.style.transform = 'translateY(-8px)'
+                e.currentTarget.style.boxShadow = '0 16px 48px rgba(0,0,0,0.1)'
+              }}
+              onMouseOut={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)'
+                e.currentTarget.style.boxShadow = '0 4px 20px rgba(0,0,0,0.06)'
+              }}
             >
-              {/* Image Section */}
-              <div
-                style={{
-                  flex: '1',
-                  position: 'relative',
-                  height: '400px',
-                  borderRadius: '8px',
-                  overflow: 'hidden',
-                  boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)'
-                }}
-              >
+              <div style={{ position: 'relative', overflow: 'hidden' }}>
                 <img
-                  src={theme.image}
-                  alt={theme.title}
+                  src={project.image}
+                  alt={project.title}
                   style={{
                     width: '100%',
-                    height: '100%',
+                    height: '220px',
                     objectFit: 'cover',
-                    objectPosition: 'center',
-                    transition: 'transform 0.3s ease'
+                    transition: 'transform 0.6s ease',
                   }}
-                  className="theme-image"
+                  onMouseOver={(e) => (e.currentTarget.style.transform = 'scale(1.05)')}
+                  onMouseOut={(e) => (e.currentTarget.style.transform = 'scale(1)')}
                 />
+                <span style={{
+                  position: 'absolute',
+                  top: '1rem',
+                  left: '1rem',
+                  fontSize: '0.7rem',
+                  fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+                  fontWeight: '600',
+                  color: 'white',
+                  padding: '0.3rem 0.8rem',
+                  borderRadius: '4px',
+                  background: project.status === 'Now Selling' ? '#2d8a4e' : project.status === 'Upcoming' ? '#c8a45a' : '#1a3c5e',
+                  letterSpacing: '0.5px',
+                  textTransform: 'uppercase',
+                }}>
+                  {project.status}
+                </span>
               </div>
-
-              {/* Content Section */}
-              <div
-                style={{
-                  flex: '1',
-                  padding: '2rem',
-                  textAlign: theme.layout === 'right' ? 'right' : 'left'
-                }}
-              >
-                <h3
-                  style={{
-                    fontSize: 'clamp(1.8rem, 4vw, 2.8rem)',
-                    color: '#000000ff',
-                    marginBottom: '0.5rem',
-                    lineHeight: '1.2',
-                    fontFamily: "'Dancing Script', cursive", // <--  Birthday Celebration Venue
-                    // textShadow: '1px 1px 3px rgba(242, 10, 10, 0.2)',
-                  }}
-                >
-                  {theme.title}
+              <div style={{ padding: '1.5rem' }}>
+                <h3 style={{
+                  fontSize: '1.25rem',
+                  fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+                  fontWeight: '600',
+                  color: '#1a3c5e',
+                  marginBottom: '0.75rem',
+                }}>
+                  {project.title}
                 </h3>
-
-
-<h4
-  style={{
-    fontSize: '1.1rem',
-    color: '#3f3f3f',
-    marginBottom: '1.5rem',
-    letterSpacing: '0.05em',
-    textTransform: 'uppercase',
-    fontWeight: '550',
-    fontFamily: '"Playfair Display", "Georgia", "Times New Roman", serif', //  Perfect for Memorable Birthdays
-    // fontFamily: '"Poppins", "Helvetica Neue", Arial, sans-serif',
-  }}
->
-                  {theme.subtitle}
-                </h4>
-
-                <p
-                  style={{
-                    fontSize: '1.1rem',
-                  color: '#595959',
-                    lineHeight: '1.7',
-                    marginBottom: '2rem',
-                    maxWidth: '400px',
-                    margin:
-                      index % 2 === 1
-                        ? '0 0 2rem auto'
-                        : '0 0 2rem 0',
-                    fontFamily: 'Montserrat' //  Perfect for Memorable Birthdays
-                  }}
-                >
-                  {theme.description}
+                <p style={{
+                  fontSize: '0.85rem',
+                  fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+                  fontWeight: '400',
+                  color: '#666',
+                  lineHeight: 1.6,
+                  marginBottom: '1.25rem',
+                }}>
+                  {project.description}
                 </p>
-
-     <button
-  style={{
-    background: 'linear-gradient(135deg, #000000 0%, #595959 100%)',
-    color: 'white',
-    padding: '0.875rem 2.5rem',
-    fontSize: '0.9rem',
-    fontWeight: '600',
-    letterSpacing: '0.05em',
-    border: 'none',
-    cursor: 'pointer',
-    borderRadius: '50px',
-    textTransform: 'uppercase',
-    position: 'relative',
-    overflow: 'hidden',
-    transition: 'all 0.35s cubic-bezier(0.4, 0, 0.2, 1)',
-    boxShadow: '0 4px 15px rgba(63, 63, 63, 0.3)',
-    fontFamily: '"Poppins", sans-serif',
-  }}
-  onMouseOver={(e) => {
-    const target = e.target as HTMLButtonElement
-    target.style.transform = 'translateY(-3px) scale(1.05)'
-    target.style.boxShadow = '0 8px 25px rgba(0, 0, 0, 0.6), 0 0 20px rgba(63, 63, 63, 0.4)'
-    target.style.background = 'linear-gradient(135deg, #595959 0%, #000000 100%)'
-    target.style.borderRadius = '40px' // shape morph effect
-  }}
-  onMouseOut={(e) => {
-    const target = e.target as HTMLButtonElement
-    target.style.transform = 'translateY(0) scale(1)'
-    target.style.boxShadow = '0 4px 15px rgba(63, 63, 63, 0.3)'
-    target.style.background = 'linear-gradient(135deg, #000000 0%, #595959 100%)'
-    target.style.borderRadius = '50px' // reset shape
-  }}
-  onClick={(e) => {
-    const target = e.target as HTMLButtonElement
-    target.style.animation = 'shake 0.5s ease-in-out'
-
-    setTimeout(() => {
-      target.style.animation = ''
-    }, 500)
-
-    const message = `Hi! I'm interested in ${theme.title.toLowerCase()} at Aravali Farm. Please provide me with more details and availability.`
-    window.open(
-      `https://wa.me/917903962473?text=${encodeURIComponent(message)}`,
-      '_blank'
-    )
-  }}
->
-  {theme.buttonText}
-</button>
-
-<style>
-{`
-@keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  20%, 60% { transform: translateX(-5px); }
-  40%, 80% { transform: translateX(5px); }
-}
-`}
-</style>
-
-
+                <div style={{
+                  display: 'flex',
+                  flexWrap: 'wrap',
+                  gap: '0.5rem',
+                  marginBottom: '1.25rem',
+                }}>
+                  {project.features.map((feature, i) => (
+                    <span
+                      key={i}
+                      style={{
+                        fontSize: '0.7rem',
+                        fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+                        fontWeight: '500',
+                        color: '#1a3c5e',
+                        padding: '0.25rem 0.6rem',
+                        borderRadius: '4px',
+                        background: 'rgba(26, 60, 94, 0.06)',
+                        letterSpacing: '0.3px',
+                      }}
+                    >
+                      {feature}
+                    </span>
+                  ))}
+                </div>
+                <a
+                  href={project.href}
+                  style={{
+                    fontSize: '0.85rem',
+                    fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+                    fontWeight: '600',
+                    color: '#c8a45a',
+                    textDecoration: 'none',
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '0.4rem',
+                    transition: 'gap 0.3s ease',
+                  }}
+                  onMouseOver={(e) => (e.currentTarget.style.gap = '0.7rem')}
+                  onMouseOut={(e) => (e.currentTarget.style.gap = '0.4rem')}
+                >
+                  View Details
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
               </div>
             </div>
           ))}
         </div>
       </div>
 
-      {/* Responsive Design */}
       <style jsx>{`
-        @keyframes shake {
-          0%, 100% { transform: translateX(0); }
-          10%, 30%, 50%, 70%, 90% { transform: translateX(-3px); }
-          20%, 40%, 60%, 80% { transform: translateX(3px); }
-        }
-
-        @media (max-width: 1024px) {
-          div[style*='flex-direction: row'],
-          div[style*='flex-direction: row-reverse'] {
-            flex-direction: column !important;
-            gap: 2rem !important;
-          }
-        }
-
         @media (max-width: 768px) {
-          h3 {
-            font-size: 1.8rem !important;
+          div[style*="repeat(3"] {
+            grid-template-columns: 1fr !important;
           }
-
-          h2 {
-            font-size: 2.2rem !important;
-          }
-
-          button {
-            font-size: 0.9rem !important;
-            padding: 0.8rem 1.5rem !important;
+        }
+        @media (min-width: 769px) and (max-width: 1024px) {
+          div[style*="repeat(3"] {
+            grid-template-columns: repeat(2, 1fr) !important;
           }
         }
       `}</style>

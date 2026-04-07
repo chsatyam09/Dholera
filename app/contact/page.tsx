@@ -3,7 +3,6 @@
 import React, { useState } from 'react'
 import Navigation from '@/app/components/Navigation'
 import Footer from '@/app/components/Footer'
-import ScrollToTopButton from '@/app/components/ScrollToTopButton'
 import HorizontalContactCard from '@/app/components/HorizontalContactCard'
 
 // Success Modal Component
@@ -1486,7 +1485,6 @@ export default function ContactPage() {
       </section>
 
       <Footer />
-      <ScrollToTopButton />
 
       {/* Simplified Animations and Responsive Design */}
       <style jsx>{`
